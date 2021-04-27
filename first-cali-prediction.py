@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[8]:
-
 
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
@@ -10,8 +8,6 @@ import os
 os.getcwd()
 data = pd.read_csv("./Cali Hosuing Predict_files/housing.csv")
 
-
-# In[9]:
 
 
 #exploring the dataset
@@ -26,9 +22,6 @@ data.info()
 data.columns
 
 
-# In[11]:
-
-
 #creating the feature matrix of selected features for prediciton
 feature_names=['longitude','latitude','population','total_rooms',
               'housing_median_age','median_income']
@@ -36,14 +29,11 @@ X= data[feature_names]
 X.head()
 
 
-# In[12]:
 
 
 y = data.median_house_value
 y[:2]
 
-
-# In[13]:
 
 
 from sklearn.model_selection import train_test_split
@@ -65,8 +55,6 @@ print("MAE without tuning: {:,.0f}" . format(mean_absolute_error(y_test,predicti
 print(model.score(X_test,y_test))
 
 
-# In[14]:
-
 
 #we shall now perform some hyper-parameter tuning to find the optimal max_leaf_nodes that
 #help model predict without risk of underfitting or overfitting.
@@ -77,8 +65,6 @@ def calculate_mae(max_leaf_nodes, X_train, X_test, y_train, y_test):
     mae = mean_absolute_error(y_test, predictions)
     return(mae)
 
-
-# In[15]:
 
 
 #loop to find ideal tree size from list of several leaf_nodes
@@ -91,8 +77,6 @@ best_tree_size = min(scores, key=scores.get)
 
 print(scores.values())
 
-
-# In[16]:
 
 
 #using the best leaf_size, let's fit the model again
@@ -107,13 +91,10 @@ print(mean_absolute_error(y,final_predict))
 print(final_model.score(X,y))
 
 
-# In[24]:
-
 
 final_predict[:10].round(1)
 
-
-# In[ ]:
+#final_model after tuning was worse than initial model and i cannot figure out why?
 
 
 
