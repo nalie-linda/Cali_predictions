@@ -94,7 +94,17 @@ print(final_model.score(X,y))
 
 final_predict[:10].round(1)
 
-#final_model after tuning was worse than initial model and i cannot figure out why?
+#final_model after tuning was worse than initial model.
+
+#fitting this same model with a RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor
+forest_model = RandomForestRegressor(random_state =1)
+forest_model.fit(X_train,y_train)
+predictions = forest_model.predict(X_test)
+
+print(mean_absolute_error(y_test,predictions))
+# the score of 0.81 is far better when using a RandomForest than a Decision Tree..
+print(forest_model.score(X_test, y_test))
 
 
 
